@@ -1,0 +1,14 @@
+.sin-card {
+	background-color: grey;
+	margin: 8px;
+	width: 350px;
+	color: black;
+}
+
+.sins-dashboard {
+	height: 120px;
+	background-color: #373737;
+	padding-right: 8%;
+	padding-left: 8%;
+	font-size: 40;
+}
