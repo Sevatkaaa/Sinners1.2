@@ -1,0 +1,30 @@
+SinController:
+    "/main" GET
+    getSins(String filter) - field not required
+        return all sins from db if filer is missing
+        return sins with type = filter instead
+
+    "/main" POST
+    addSins(...) - creates and adds a new sin to db
+
+
+SinFacade: controller uses facade to make anything
+    facade has logic and delegates job to service
+
+
+SinService:
+    uses sinRepo to load or save anything to db
+
+
+SinRepository:
+    works with db layer
+
+
+SinModel:
+    sin from db
+
+SinData:
+    json dto (Data Transfer Object)
+
+SinConverter:
+    converts SinModel to SinData to make it readable on FE
