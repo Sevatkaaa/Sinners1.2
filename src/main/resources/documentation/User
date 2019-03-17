@@ -1,0 +1,38 @@
+UserController:
+    "/user" GET
+    getAllUsers()
+        return list of all users
+
+    "/registration" POST
+    addUser(UserModel userModel)
+        adds user
+        return false if user exists
+        return true instead
+
+    "/activation/{code}" GET
+    activateUser(String code)
+        activates user
+        return false if cant find user with such code
+        return true instead
+
+
+UserFacade: controller uses facade to make anything
+    facade has logic and delegates job to service
+
+
+UserService:
+    uses userRepo to load or save anything to db
+
+
+UserRepository:
+    works with db layer
+
+
+UserModel:
+    user from db
+
+UserData:
+    json dto (Data Transfer Object)
+
+UserConverter:
+    converts UserModel to UserData

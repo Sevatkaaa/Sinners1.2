@@ -23,7 +23,7 @@ public class SinController {
         return sinFacade.getSins(filter);
     }
 
-    @RequestMapping(value = "/mail", method = RequestMethod.POST)
+    @RequestMapping(value = "/main", method = RequestMethod.POST)
     public void addSin(@AuthenticationPrincipal UserModel user,
                        @RequestParam String sinType,
                        @RequestParam Integer sinWeight,
