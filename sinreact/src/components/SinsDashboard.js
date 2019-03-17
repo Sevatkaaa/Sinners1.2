@@ -17,7 +17,7 @@ class SinsDashboard extends React.Component {
 				makeSin("Seva", "Drocha", 5, "Konchiv"),
 				makeSin("Markiro", "Drocha", 25, "Podrochiv bez ruk"),
 				makeSin("Markiro", "Drocha", 15, "Podrochiv Seve"),
-				makeSin("Seva", "Drocha", 29, "Подрочить на географии"),
+				makeSin("Seva", "Drocha", 29, "Подрочить на географии. Подрочить на географии. Подрочить на географии. Подрочить на географии. Подрочить на географии"),
 			],
 			score: 0
 		}
