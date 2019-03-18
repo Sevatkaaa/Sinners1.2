@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import logo from '../logo.svg';
-import './App.css';
-import SinsDashboard from './SinsDashboard';
+import React from 'react'
+import './App.css'
+import FakeSinDashboard from '../containers/FakeSinDashboard';
 
 const App = () => (
-  <SinsDashboard/>
+  <FakeSinDashboard/>
 )
 
 export default App;

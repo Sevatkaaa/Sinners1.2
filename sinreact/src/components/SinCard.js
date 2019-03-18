@@ -22,7 +22,8 @@ const theme = createMuiTheme({
 
 const SinCard = (props) => {
 	const [count, setCount] = useState(0);
-	const sin = props.sin || { username: "Mark", sinType: "Drocha", points: 10, sinText: "Podrochiv" }
+	const sin = props.sin || {id:100, username: "Mark", sinType: "Drocha", points: 10, sinText: "Podrochiv" }
+	const onClick = props.onClick || (() => {})
 	const isRaised = count < 100;
 
 	return (
@@ -37,13 +38,13 @@ const SinCard = (props) => {
 			<Divider />
 			<CardContent style={{ padding: "8px" }}>
 				<Grid container>
-					<Grid children xs zeroMinWidth>
+					<Grid item xs zeroMinWidth>
 						<Typography noWrap>{sin.sinText}</Typography>
 					</Grid>
 					<Grid children>
 						<IconButton disabled={!isRaised} onClick={() => {
 							setCount(count + sin.points)
-							props.onClick()
+							onClick()
 						}}>
 							<ThreeSixty />
 						</IconButton>
