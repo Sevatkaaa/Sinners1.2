@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `sin_version` (
-	`version` int(11) DEFAULT NULL
+  `version` int(11) DEFAULT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 INSERT INTO `sin_version` (`version`) VALUES (1);
 
