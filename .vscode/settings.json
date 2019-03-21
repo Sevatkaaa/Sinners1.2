@@ -1,0 +1,4 @@
+{
+	"python.envFile": "${workspaceFolder}/src/main/python/env/Scripts",
+	"python.pythonPath": "C:\\Windows\\System32\\cmd.exe"
+}
