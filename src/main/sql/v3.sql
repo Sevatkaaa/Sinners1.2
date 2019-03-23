@@ -1,4 +1,4 @@
-UPDATE `sin_version` SET `version`=2 WHERE `version`=1 LIMIT 1;
+UPDATE `sin_version` SET `version`=3 WHERE `version`=2 LIMIT 1;
 
 CREATE TABLE IF NOT EXISTS `proofs_temp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
