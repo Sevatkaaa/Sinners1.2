@@ -1,0 +1,20 @@
+ErrorDTO
+
+fields:
+    errorCode (int) - unique error code
+    message (String) - custom message for current error
+    originalMessage (String) - message from code exception
+    timestamp (String) - timestamp in format dd/MM/yyyy HH:mm:ss
+    
+ErrorDTO is returned from api when exception is thrown
+    If HttpStatus is 500, then exception is not handled and probably it was unexpected internal error
+    Otherwise, status is 400 bad request
+    
+If you want to create a new exception and throw it in code, you have to create new entity in class ErrorCode
+    with unique errorCode and exception class
+    
+    don't forget to add default message for current exception
+    
+    
+Sometimes not only errorDTO can be returned for exception
+    It means that there was some exception handled by Spring framework and it can't be changed
