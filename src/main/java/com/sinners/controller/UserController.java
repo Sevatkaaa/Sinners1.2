@@ -26,7 +26,7 @@ public class UserController extends BaseController {
         return userFacade.getUserByName(name);
     }
 
-    @RequestMapping(value = "registration",method = RequestMethod.POST)
+    @RequestMapping(value = "registration", method = RequestMethod.POST)
     public void addUser(String name, String password, String checkPassword, String email) {
         userFacade.addUser(name, password, checkPassword, email);
     }
