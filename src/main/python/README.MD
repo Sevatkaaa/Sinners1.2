@@ -60,17 +60,26 @@
 
     If you get an error about Microsoft Visual C++ is required, see point 6 below.
 
-	If you get an error about mysql.h missing, then go to 
+    If you get an error about mysql.h missing, then go to 
 
-	https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysql-python
+    https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysql-python
 
-	download the appropriate 
+    download the appropriate 
 
-		mysqlclient‑1.4.2‑cp35‑cp35m‑win_amd64.whl
-		mysqlclient‑1.4.2‑cp36‑cp36m‑win_amd64.whl
-		mysqlclient‑1.4.2‑cp37‑cp37m‑win_amd64.whl
+        mysqlclient‑1.4.2‑cp35‑cp35m‑win_amd64.whl
+        mysqlclient‑1.4.2‑cp36‑cp36m‑win_amd64.whl
+        mysqlclient‑1.4.2‑cp37‑cp37m‑win_amd64.whl
 
-	and install with
+    and install with
 
     ```
-	pip install mysqlclient‑1.4.2‑cp3X‑cp3Xm‑win_amd64.whl
+    pip install mysqlclient‑1.4.2‑cp3X‑cp3Xm‑win_amd64.whl
+
+5. Create `sinners` DB and tables
+    Run 'sinners.sql'
+
+6. Parse bible and fill DB tables
+    ```
+    python parse_bible.py
+    python parse_sins.py
+    ```

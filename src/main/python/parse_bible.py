@@ -30,18 +30,18 @@ def parse_books(file_name):
     books = {}
 
     with open(file_name, 'r') as f:
-    raw_html = f.read()
-    soup = BeautifulSoup(raw_html, 'html.parser')
+        raw_html = f.read()
+        soup = BeautifulSoup(raw_html, 'html.parser')
 
-    for book_row in soup.find_all('tr'):
-        if 'ot-book' in book_row.get('class', '/'):
-        book_title = ''.join([i for i in book_row.get_text() if not i.isdigit()]).strip()
-        chapters = book_row.findAll('td')[1]
-        
-        for anchor in chapters.findAll('a'):
-            url = 'https://www.biblegateway.com' + anchor.get('href')
-            chapter_number = anchor.get_text()
-            books[book_title] = books.get(book_title, []) + [(chapter_number, url)]
+        for book_row in soup.find_all('tr'):
+            if 'ot-book' in book_row.get('class', '/'):
+                book_title = ''.join([i for i in book_row.get_text() if not i.isdigit()]).strip()
+                chapters = book_row.findAll('td')[1]
+                
+                for anchor in chapters.findAll('a'):
+                    url = 'https://www.biblegateway.com' + anchor.get('href')
+                    chapter_number = anchor.get_text()
+                    books[book_title] = books.get(book_title, []) + [(chapter_number, url)]
     return books
 
 def run_sql(connection, query, val=None):
@@ -57,13 +57,9 @@ def fill_tables(books, connection=None):
         sql_insert_query = """INSERT INTO `books` (`title`) VALUES (%s)"""
         val = (title, )
         run_sql(connection, sql_insert_query, val)
-        print(i, title)
-        for chapter in books[title]:
-            sql_insert_query = """INSERT INTO `chapters` (`book_id`, `chapter_number`, `url`) VALUES (%s, %s)"""
-            val = (i+1, chapter[0], chapter[1])
-            run_sql(connection, sql_insert_query, val)
+        print(i, title, "- DONE")
 
-def get_chapters_text(books):
+def get_verses_texts(books):
     def parse_chapter(url):
         headers = requests.utils.default_headers()
         headers.update({
@@ -81,15 +77,15 @@ def get_chapters_text(books):
 
     connection = connect_to_db()
 
-    for title in books.keys():
+    for i, title in enumerate(books.keys()):
         for chapter_id, url in books[title]:
             url = f'https://bible-api.com/{title}+{chapter_id}'
             result = parse_chapter(url)
             if result is None:
                 break
             for verse in result:
-                sql_insert_query = """INSERT INTO `verses` (`chapter_id`, `verse_number`, `text`) VALUES (%s, %s, %s)"""
-                val = (verse['chapter'], verse['verse'], result)
+                sql_insert_query = """INSERT INTO `verses` (`book_id`, `chapter_number`, `verse_number`, `text`) VALUES (%s, %s, %s, %s)"""
+                val = (i+1, verse['chapter'], verse['verse'], verse['text'])
                 run_sql(connection, sql_insert_query, val)
             print(f'{title}.{chapter_id} - Done')
 
@@ -97,4 +93,4 @@ def get_chapters_text(books):
 if __name__ == "__main__":
     books = parse_books('bible.html')
     fill_tables(books)
-    get_chapters_text(books)
+    get_verses_texts(books)
