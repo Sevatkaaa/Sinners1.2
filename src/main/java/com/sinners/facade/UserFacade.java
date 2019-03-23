@@ -32,4 +32,8 @@ public class UserFacade {
     public UserData getUserByName(String name) {
         return userConverter.convert(userService.getUserByName(name));
     }
+
+    public void loginUser(String username, String password) {
+        userService.loginUser(username, password);
+    }
 }

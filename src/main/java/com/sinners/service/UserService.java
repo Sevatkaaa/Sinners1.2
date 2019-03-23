@@ -81,6 +81,13 @@ public class UserService implements UserDetailsService {
         return userModels;
     }
 
+    public void loginUser(String username, String password) {
+        UserModel user = getUserByName(username);
+        if (!user.getPassword().equals(sha256Hex(password))) {
+            throw new UserNotFoundException("Invalid password");
+        }
+    }
+
     private void checkPassword(String password, String checkPassword) {
         if (!password.equals(checkPassword)) {
             throw new PasswordMismatchException("Different passwords input");

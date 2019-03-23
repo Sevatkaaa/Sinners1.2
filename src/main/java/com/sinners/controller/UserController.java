@@ -35,4 +35,9 @@ public class UserController extends BaseController {
     public void activateUser(@PathVariable String code) {
         userFacade.activateUser(code);
     }
+
+    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
+    public void loginUser(String username, String password) {
+        userFacade.loginUser(username, password);
+    }
 }
