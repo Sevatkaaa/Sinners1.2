@@ -2,6 +2,7 @@ package com.sinners.service;
 
 import com.sinners.exception.EmailSendingException;
 import com.sinners.exception.InvalidEmailException;
+import com.sinners.exception.PasswordMismatchException;
 import com.sinners.exception.UserNotFoundException;
 import com.sinners.repository.UserRepository;
 import com.sinners.user.Role;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -40,29 +40,14 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public void addUser(String name, String password, String email) {
+    public void addUser(String name, String password, String checkPassword, String email) {
+        checkPassword(password, checkPassword);
         validateEmail(email);
-        
-        UserModel userFromDB = userRepository.findByUsername(name);
-        if (userFromDB != null) {
-            throw new UserNotFoundException();
-        }
-        UserModel user = new UserModel();
-        user.setUsername(name);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setActive(false);
-        user.setRoles(Collections.singleton(Role.USER));
-        user.setActivationCode(UUID.randomUUID().toString());
+        checkForUser(name);
 
-        if (!StringUtils.isEmpty(user.getEmail())) {
-            try {
-                String message = String.format(WELCOME, user.getUsername(), String.format(LINK, url), user.getActivationCode());
-                mailService.sendEmail(user.getEmail(), ACTIVATION_CODE, message);
-            } catch (Exception e) {
-                throw new EmailSendingException(e);
-            }
-        }
+        UserModel user = createNewUser(name, password, email);
+
+        sendEmail(user);
 
         userRepository.save(user);
     }
@@ -89,10 +74,43 @@ public class UserService implements UserDetailsService {
         return userModels;
     }
 
+    private void checkPassword(String password, String checkPassword) {
+        if (!password.equals(checkPassword)) {
+            throw new PasswordMismatchException();
+        }
+    }
+
     private void validateEmail(String email) {
         Pattern p = Pattern.compile("\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
         if (!p.matcher(email).find()) {
             throw new InvalidEmailException();
+        }
+    }
+
+    private void checkForUser(String name) {
+        UserModel userFromDB = userRepository.findByUsername(name);
+        if (userFromDB != null) {
+            throw new UserNotFoundException();
+        }
+    }
+
+    private UserModel createNewUser(String name, String password, String email) {
+        UserModel user = new UserModel();
+        user.setUsername(name);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setActive(false);
+        user.setRoles(Collections.singleton(Role.USER));
+        user.setActivationCode(UUID.randomUUID().toString());
+        return user;
+    }
+
+    private void sendEmail(UserModel user) {
+        try {
+            String message = String.format(WELCOME, user.getUsername(), String.format(LINK, url), user.getActivationCode());
+            mailService.sendEmail(user.getEmail(), ACTIVATION_CODE, message);
+        } catch (Exception e) {
+            throw new EmailSendingException(e);
         }
     }
 }

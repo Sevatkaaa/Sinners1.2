@@ -22,8 +22,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "registration",method = RequestMethod.POST)
-    public void addUser(String name, String password, String email) {
-        userFacade.addUser(name, password, email);
+    public void addUser(String name, String password, String checkPassword, String email) {
+        userFacade.addUser(name, password, checkPassword, email);
     }
 
     @RequestMapping(value = "/activation/{code}", method = RequestMethod.GET)

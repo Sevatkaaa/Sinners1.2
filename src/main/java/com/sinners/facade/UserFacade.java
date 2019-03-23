@@ -22,8 +22,8 @@ public class UserFacade {
         return userConverter.convert(userService.getAllUsers());
     }
 
-    public void addUser(String name, String password, String email) {
-        userService.addUser(name, password, email);
+    public void addUser(String name, String password, String checkPassword, String email) {
+        userService.addUser(name, password, checkPassword, email);
     }
 
     public void activateUser(String code) {
