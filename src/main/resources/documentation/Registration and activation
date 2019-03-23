@@ -1,0 +1,23 @@
+To register user, send POST request to {base.url}/register with params:
+
+    name (String)
+    password (String)
+    checkPassword (String)
+    email (String)
+    
+    1) if password != checkPassword, response will be errorCode 30
+    2) if email is invalid, response will be errorCode 21
+    3) if user with current name already exists, response will be errorCode 41
+    4) if message can't be sent, response will be errorCode 20
+    
+    Otherwise, you will register a new user and email will be sent to email address
+    
+    Activation link in email will be {base.url}/activation/{activationCode}
+    
+    Don't forget to add your ip to application.properties as {base.url} value
+    Also don't forget to set right value for password {spring.mail.password} value
+    
+To activate this user, follow the link in message or send GET to {base.url}/activation/{activationCode}
+
+    Until user's activation code in db is NOT null, he is NOT active
+    When you follow the link, activation code in db will become null and user will be active from this moment
