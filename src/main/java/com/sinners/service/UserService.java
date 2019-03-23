@@ -14,8 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.util.*;
-import java.util.regex.Pattern;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -85,9 +86,10 @@ public class UserService implements UserDetailsService {
     }
 
     private void validateEmail(String email) {
-        Pattern p = Pattern.compile("\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
-        if (!p.matcher(email).find()) {
-            throw new InvalidEmailException("Email doesn't match condition");
+        try {
+            new InternetAddress(email).validate();
+        } catch (AddressException ex) {
+            throw new InvalidEmailException("Email doesn't match condition", ex);
         }
     }
 
