@@ -18,6 +18,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.*;
 
+import static org.apache.commons.codec.digest.DigestUtils.sha256Hex;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -102,7 +104,7 @@ public class UserService implements UserDetailsService {
     private UserModel createNewUser(String name, String password, String email) {
         UserModel user = new UserModel();
         user.setUsername(name);
-        user.setPassword(password);
+        user.setPassword(sha256Hex(password));
         user.setEmail(email);
         user.setActive(false);
         user.setRoles(Collections.singleton(Role.USER));
