@@ -2,7 +2,6 @@ package com.sinners.controller;
 
 import com.sinners.facade.UserFacade;
 import com.sinners.user.UserData;
-import com.sinners.user.UserModel;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,12 +22,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "registration",method = RequestMethod.POST)
-    public boolean addUser(UserModel user) {
-        return userFacade.addUser(user);
+    public void addUser(String name, String password, String email) {
+        userFacade.addUser(name, password, email);
     }
 
     @RequestMapping(value = "/activation/{code}", method = RequestMethod.GET)
-    public boolean activateUser(@PathVariable String code) {
-        return userFacade.activateUser(code);
+    public void activateUser(@PathVariable String code) {
+        userFacade.activateUser(code);
     }
 }

@@ -22,11 +22,11 @@ public class UserFacade {
         return userConverter.convert(userService.getAllUsers());
     }
 
-    public boolean addUser(UserModel userModel) {
-        return userService.addUser(userModel);
+    public void addUser(String name, String password, String email) {
+        userService.addUser(name, password, email);
     }
 
-    public boolean activateUser(String code) {
-        return userService.activateUser(code);
+    public void activateUser(String code) {
+        userService.activateUser(code);
     }
 }
