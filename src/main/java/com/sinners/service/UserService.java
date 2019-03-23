@@ -63,6 +63,11 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public UserModel getUserByName(String name) {
+        return Optional.ofNullable(userRepository.findByUsername(name))
+                .orElseThrow(() -> new UserNotFoundException("No user found for current name"));
+    }
+
     public List<UserModel> getAllUsers() {
         Iterable<UserModel> users = userRepository.findAll();
         List<UserModel> userModels = new ArrayList<>();

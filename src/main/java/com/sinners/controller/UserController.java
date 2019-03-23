@@ -21,6 +21,11 @@ public class UserController extends BaseController {
         return userFacade.getAllUsers();
     }
 
+    @RequestMapping(value = "user/{name}", method = RequestMethod.GET)
+    public UserData getUser(@PathVariable String name) {
+        return userFacade.getUserByName(name);
+    }
+
     @RequestMapping(value = "registration",method = RequestMethod.POST)
     public void addUser(String name, String password, String checkPassword, String email) {
         userFacade.addUser(name, password, checkPassword, email);

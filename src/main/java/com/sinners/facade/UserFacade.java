@@ -3,7 +3,6 @@ package com.sinners.facade;
 import com.sinners.converter.UserConverter;
 import com.sinners.service.UserService;
 import com.sinners.user.UserData;
-import com.sinners.user.UserModel;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -28,5 +27,9 @@ public class UserFacade {
 
     public void activateUser(String code) {
         userService.activateUser(code);
+    }
+
+    public UserData getUserByName(String name) {
+        return userConverter.convert(userService.getUserByName(name));
     }
 }
