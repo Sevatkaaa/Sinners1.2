@@ -23,7 +23,6 @@ public enum ErrorCode {
     private int errorCode;
     private Class<? extends Exception> exception;
     private String message;
-    private int httpStatusCode;
 
     ErrorCode(int errorCode, Class<? extends Exception> exception, String message) {
         this.errorCode = errorCode;
@@ -71,11 +70,4 @@ public enum ErrorCode {
         this.message = message;
     }
 
-    public int getHttpStatusCode() {
-        return httpStatusCode;
-    }
-
-    public void setHttpStatusCode(int httpStatusCode) {
-        this.httpStatusCode = httpStatusCode;
-    }
 }
