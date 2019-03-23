@@ -53,7 +53,7 @@
         ```
 
 
-4. Install required libs that are included in `pips.txt`:
+4. Install required libs that are included in `pips.txt`
     ```
     pip install -r pips.txt
     ```
@@ -76,7 +76,8 @@
     pip install mysqlclient‑1.4.2‑cp3X‑cp3Xm‑win_amd64.whl
 
 5. Create `sinners` DB and tables
-    Run 'sinners.sql'
+
+    Run 'sinners.sql' in HeidiSQL SQL or Management Studio
 
 6. Parse bible and fill DB tables
     ```
