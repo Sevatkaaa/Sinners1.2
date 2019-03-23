@@ -20,7 +20,7 @@ public class BaseController {
     public ResponseEntity<ErrorData> handleException(Exception e) {
         ErrorCode errorCode = ErrorCode.getCodeForException(e);
 
-        return errorCode == null ? getServerErrorResponse() : getErrorResponseForCode(errorCode, e);
+        return errorCode == null ? getServerErrorResponse(e) : getErrorResponseForCode(errorCode, e);
     }
 
     private ResponseEntity<ErrorData> getErrorResponseForCode(ErrorCode errorCode, Exception e) {
@@ -33,10 +33,11 @@ public class BaseController {
         return new ResponseEntity<>(errorData, HttpStatus.BAD_REQUEST);
     }
 
-    private ResponseEntity<ErrorData> getServerErrorResponse() {
+    private ResponseEntity<ErrorData> getServerErrorResponse(Exception e) {
         ErrorData errorData = new ErrorData();
         errorData.setErrorCode(ErrorCode.UNHANDLED_EXCEPTION_CODE);
         errorData.setMessage(ErrorCode.UNHANDLED_EXCEPTION_MESSAGE);
+        errorData.setOriginalMessage(e.getMessage());
         errorData.setTimestamp(getTimestamp());
         return new ResponseEntity<>(errorData, HttpStatus.INTERNAL_SERVER_ERROR);
     }
