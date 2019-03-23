@@ -92,8 +92,9 @@ public class UserService implements UserDetailsService {
     }
 
     private void checkForUser(String name) {
-        Optional.ofNullable(userRepository.findByUsername(name))
-                .orElseThrow(() -> new UserCreationException("User with such name already exists"));
+        if (userRepository.findByUsername(name) != null) {
+               throw new UserCreationException("User with such name already exists");
+        }
     }
 
     private UserModel createNewUser(String name, String password, String email) {
