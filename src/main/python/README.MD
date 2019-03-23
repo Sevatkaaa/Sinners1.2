@@ -1,4 +1,12 @@
-## Install Dependencies
+## Deploy DB without python
+1. Create `sinners` DB and tables
+
+    Run 'sinners.sql' in HeidiSQL SQL or Management Studio
+
+    Run 'sinners-backup-v1.sql'
+
+
+## Deploy DB with Python
 
 1. Python 3.7.2
     - [download](https://www.python.org/downloads/release/python-372/)
