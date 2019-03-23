@@ -88,7 +88,9 @@
     Run 'sinners.sql' in HeidiSQL SQL or Management Studio
 
 6. Parse bible and fill DB tables
-    ```
-    python parse_bible.py
-    python parse_sins.py
-    ```
+
+    Run parsers
+        ```
+        python parse_bible.py
+        python parse_sins.py
+        ```
