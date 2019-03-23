@@ -3,6 +3,7 @@ package com.sinners.service;
 import com.sinners.exception.EmailSendingException;
 import com.sinners.exception.InvalidEmailException;
 import com.sinners.exception.PasswordMismatchException;
+import com.sinners.exception.UserCreationException;
 import com.sinners.exception.UserNotFoundException;
 import com.sinners.repository.UserRepository;
 import com.sinners.user.Role;
@@ -55,7 +56,7 @@ public class UserService implements UserDetailsService {
     public void activateUser(String code) {
         UserModel user = userRepository.findByActivationCode(code);
         if (user == null) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException("No user found with current activation code");
         }
         user.setActivationCode(null);
         user.setActive(true);
@@ -76,21 +77,21 @@ public class UserService implements UserDetailsService {
 
     private void checkPassword(String password, String checkPassword) {
         if (!password.equals(checkPassword)) {
-            throw new PasswordMismatchException();
+            throw new PasswordMismatchException("Different passwords input");
         }
     }
 
     private void validateEmail(String email) {
         Pattern p = Pattern.compile("\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
         if (!p.matcher(email).find()) {
-            throw new InvalidEmailException();
+            throw new InvalidEmailException("Email doesn't match condition");
         }
     }
 
     private void checkForUser(String name) {
         UserModel userFromDB = userRepository.findByUsername(name);
         if (userFromDB != null) {
-            throw new UserNotFoundException();
+            throw new UserCreationException("User with such name already exists");
         }
     }
 
@@ -110,7 +111,7 @@ public class UserService implements UserDetailsService {
             String message = String.format(WELCOME, user.getUsername(), String.format(LINK, url), user.getActivationCode());
             mailService.sendEmail(user.getEmail(), ACTIVATION_CODE, message);
         } catch (Exception e) {
-            throw new EmailSendingException(e);
+            throw new EmailSendingException("Some troubles with smtp or something else", e);
         }
     }
 }

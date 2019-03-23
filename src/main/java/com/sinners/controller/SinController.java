@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-public class SinController {
+public class SinController extends BaseController {
 
     @Resource
     private SinFacade sinFacade;

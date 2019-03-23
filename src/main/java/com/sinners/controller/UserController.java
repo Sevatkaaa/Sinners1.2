@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-public class UserController {
+public class UserController extends BaseController {
 
     @Resource
     private UserFacade userFacade;
