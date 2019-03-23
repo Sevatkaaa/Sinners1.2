@@ -54,10 +54,8 @@ public class UserService implements UserDetailsService {
     }
 
     public void activateUser(String code) {
-        UserModel user = userRepository.findByActivationCode(code);
-        if (user == null) {
-            throw new UserNotFoundException("No user found with current activation code");
-        }
+        UserModel user = Optional.ofNullable(userRepository.findByActivationCode(code))
+                .orElseThrow(() -> new UserNotFoundException("No user found with current activation code"));
         user.setActivationCode(null);
         user.setActive(true);
         userRepository.save(user);
@@ -94,10 +92,8 @@ public class UserService implements UserDetailsService {
     }
 
     private void checkForUser(String name) {
-        UserModel userFromDB = userRepository.findByUsername(name);
-        if (userFromDB != null) {
-            throw new UserCreationException("User with such name already exists");
-        }
+        Optional.ofNullable(userRepository.findByUsername(name))
+                .orElseThrow(() -> new UserCreationException("User with such name already exists"));
     }
 
     private UserModel createNewUser(String name, String password, String email) {
