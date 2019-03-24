@@ -45,7 +45,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void addUser(String name, String password, String checkPassword, String email) {
-        checkPassword(password, checkPassword);
+        checkPassword(password, checkPassword, "Different passwords input");
         validateEmail(email);
         checkForUser(name);
 
@@ -81,16 +81,13 @@ public class UserService implements UserDetailsService {
         return userModels;
     }
 
-    public void loginUser(String username, String password) {
-        UserModel user = getUserByName(username);
-        if (!user.getPassword().equals(sha256Hex(password))) {
-            throw new UserNotFoundException("Invalid password");
-        }
+    public void loginUser(String name, String password) {
+        checkPassword(getUserByName(name).getPassword(), sha256Hex(password), "Invalid password");
     }
 
-    private void checkPassword(String password, String checkPassword) {
+    private void checkPassword(String password, String checkPassword, String message) {
         if (!password.equals(checkPassword)) {
-            throw new PasswordMismatchException("Different passwords input");
+            throw new PasswordMismatchException(message);
         }
     }
 

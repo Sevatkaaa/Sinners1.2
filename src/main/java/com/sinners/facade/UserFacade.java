@@ -33,7 +33,7 @@ public class UserFacade {
         return userConverter.convert(userService.getUserByName(name));
     }
 
-    public void loginUser(String username, String password) {
-        userService.loginUser(username, password);
+    public void loginUser(String name, String password) {
+        userService.loginUser(name, password);
     }
 }

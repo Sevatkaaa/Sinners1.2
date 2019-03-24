@@ -37,7 +37,7 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-    public void loginUser(String username, String password) {
-        userFacade.loginUser(username, password);
+    public void loginUser(String name, String password) {
+        userFacade.loginUser(name, password);
     }
 }
