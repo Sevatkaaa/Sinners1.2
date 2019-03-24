@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "50458353-ca39-4cfb-a7dc-334408fd0c41",
+		"name": "Sinners",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LoginUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/loginUser?name={{NAME}}&password={{PASSWORD}}",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"loginUser"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{NAME}}"
+						},
+						{
+							"key": "password",
+							"value": "{{PASSWORD}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ActivateUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/activation/{{code}}",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"activation",
+						"{{code}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/registration?name={{NAME}}&password={{PASSWORD}}&checkPassword={{PASSWORD}}&email={{EMAIL}}",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"registration"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{NAME}}"
+						},
+						{
+							"key": "password",
+							"value": "{{PASSWORD}}"
+						},
+						{
+							"key": "checkPassword",
+							"value": "{{PASSWORD}}"
+						},
+						{
+							"key": "email",
+							"value": "{{EMAIL}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
