@@ -99,6 +99,92 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get all sins",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/main",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"main"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sins by type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/main?filter=type",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"main"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "type"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add sin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/main?sinType=type&sinWeight=10&sinDescription=description",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"main"
+					],
+					"query": [
+						{
+							"key": "sinType",
+							"value": "type"
+						},
+						{
+							"key": "sinWeight",
+							"value": "10"
+						},
+						{
+							"key": "sinDescription",
+							"value": "description"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
