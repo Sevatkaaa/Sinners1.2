@@ -29,7 +29,7 @@ public class SinService {
     }
 
     public List<SinModel> getSinsByType(String type) {
-        return sinRepository.findByType(type);
+        return sinRepository.findByTypeContaining(type);
     }
 
     public void addSin(UserModel user, String sinType, Integer sinWeight, String sinDescription) {
