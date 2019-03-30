@@ -37,4 +37,8 @@ public class SinService {
 
         sinRepository.save(sin);
     }
+
+    public List<SinModel> getSinsForUser(UserModel user) {
+        return sinRepository.findByAuthor(user);
+    }
 }

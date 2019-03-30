@@ -40,21 +40,26 @@
 		{
 			"name": "ActivateUser",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{URL}}:{{port}}/activation/{{code}}",
+					"raw": "{{URL}}:{{port}}/activation?code={{code}}",
 					"host": [
 						"{{URL}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"activation",
-						"{{code}}"
+						"activation"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "{{code}}"
+						}
 					]
 				}
 			},
@@ -101,6 +106,29 @@
 			"response": []
 		},
 		{
+			"name": "Get user by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/user/{{name}}",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"user",
+						"{{name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get all sins",
 			"request": {
 				"method": "GET",
@@ -110,13 +138,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{URL}}:{{port}}/main",
+					"raw": "{{URL}}:{{port}}/sins",
 					"host": [
 						"{{URL}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"main"
+						"sins"
 					]
 				}
 			},
@@ -132,13 +160,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{URL}}:{{port}}/main?filter=type",
+					"raw": "{{URL}}:{{port}}/sins?filter=type",
 					"host": [
 						"{{URL}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"main"
+						"sins"
 					],
 					"query": [
 						{
@@ -160,13 +188,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{URL}}:{{port}}/main?sinType=type&sinWeight=10&sinDescription=description",
+					"raw": "{{URL}}:{{port}}/sins?sinType=type&sinWeight=10&sinDescription=description",
 					"host": [
 						"{{URL}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"main"
+						"sins"
 					],
 					"query": [
 						{
@@ -181,6 +209,53 @@
 							"key": "sinDescription",
 							"value": "description"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sins for current user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/sins/current",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sins",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sins for user with name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/sins/user/{{name}}",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sins",
+						"user",
+						"{{name}}"
 					]
 				}
 			},
