@@ -25,9 +25,28 @@ const SinCard = (props) => {
 	const sin = props.sin || {id:100, username: "Mark", sinType: "Drocha", points: 10, sinText: "Podrochiv" }
 	const onClick = props.onClick || (() => {})
 	const isRaised = count < 100;
-
+    const key = props.dashId || 1
+    let backgroundColor
+    if (key % 5 === 3) {
+        backgroundColor = '#A22C29'
+    } else {
+        if (key % 11 === 10) {
+            backgroundColor = '#5F0A87'
+        }
+        else {
+            backgroundColor = '#373737'
+        }
+    }
+    console.log("keys ~> " + key)
+    console.log(props)
+    console.log("dashId ~> " + props.dashId)
+    console.log("color ~> " + backgroundColor)
 	return (
-		<Card className="sin-card" raised={isRaised}>
+        <Card
+            className="sin-card"
+            raised={isRaised}
+            style={{backgroundColor: backgroundColor}}
+        >
 			<CardHeader
 				avatar={<Avatar style={{ backgroundColor: "#FF5722" }}> {sin.username[0]} </Avatar>}
 				title={sin.sinType}
@@ -41,7 +60,7 @@ const SinCard = (props) => {
 					<Grid item xs zeroMinWidth>
 						<Typography noWrap>{sin.sinText}</Typography>
 					</Grid>
-					<Grid children>
+					<Grid>
 						<IconButton disabled={!isRaised} onClick={() => {
 							setCount(count + sin.points)
 							onClick()
