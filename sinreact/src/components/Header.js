@@ -63,10 +63,14 @@ const Header = (props) => {
                 </Grid>
             </Grid>
             <Grid item xs />
-            <Grid item>
-                <div>
+            <Grid style={{height: '104px'}} item xs={1} container direction='column' justify='flex-end' alignItems='center'>
+                <Grid item xs/>
+                <Grid item xs={6}>
+                {/* <div> */}
                     <SignInDialogIcon />
-                </div>
+                {/* </div> */}
+                </Grid>
+                <Grid item xs/>
             </Grid>
         </Grid>
     )
