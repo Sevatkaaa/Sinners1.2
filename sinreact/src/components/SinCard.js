@@ -37,15 +37,11 @@ const SinCard = (props) => {
             backgroundColor = '#373737'
         }
     }
-    console.log("keys ~> " + key)
-    console.log(props)
-    console.log("dashId ~> " + props.dashId)
-    console.log("color ~> " + backgroundColor)
 	return (
         <Card
             className="sin-card"
             raised={isRaised}
-            style={{backgroundColor: backgroundColor}}
+            style={{backgroundColor: backgroundColor, color: "#f5f5f5"}}
         >
 			<CardHeader
 				avatar={<Avatar style={{ backgroundColor: "#FF5722" }}> {sin.username[0]} </Avatar>}

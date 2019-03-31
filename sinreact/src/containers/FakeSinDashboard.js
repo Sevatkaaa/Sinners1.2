@@ -7,7 +7,36 @@ import { Cloud, Accessible } from '@material-ui/icons';
 import { store } from '../store/store'
 
 var counter = 0
-const makeSin = (username, type, points, text) => ({ id: counter++, username: username, sinType: type, points: points, sinText: text })
+const makeSin = () => {
+    const types = [
+        'Смертный грех',
+        'Мастурбация',
+        'Мастурбация на лекции',
+        'Задушить удава',
+        'Сказать, что бога нет',
+        'Анальный секс в подъезде'
+    ]
+    const sinTexts = [
+        'Должно быть весело',
+        'Одну жизнь живем',
+        'Го разок за Домбасс',
+        'Ну наверное все так делают'
+    ]
+    const usernames = [
+        'markiro420',
+        'beeffallo',
+        'sevattka1337',
+        'TOXA_KASTET',
+        'evrei1488'
+    ]
+    return ({
+        id: counter++,
+        username: usernames[Math.floor(Math.random() * usernames.length)],
+        sinType: types[Math.floor(Math.random() * types.length)],
+        points: Math.floor(Math.random() * 23) + 1,
+        sinText: sinTexts[Math.floor(Math.random() * sinTexts.length)],
+    })
+}
 
 const FakeSinDashboard = (props) => {
     const sins = props.fakeSins || []
@@ -27,7 +56,7 @@ return (
                         <Grid container alignItems="center" justify="center" direction="column">
                             <IconButton
                                 onClick={() => {
-                                    store.dispatch(addFakeSinCards([makeSin("Mark", "Drocha", 22, "Hello from redux")]))
+                                    store.dispatch(addFakeSinCards([makeSin("Mark", "Drocha", "Hello from redux")]))
                                 }}
                             >
                                 <Cloud color='primary'/>
@@ -36,7 +65,7 @@ return (
                     </Grid>
                 </Grid>
                 <Grid container justify="center">
-                    {sins.map((sin, i) => (<SinCard key={i} dashId={i} sin={sin} />))}
+                    {sins.map((sin) => (<SinCard key={sin.id} dashId={sin.id} sin={sin} />))}
                 </Grid>
             </Grid>
         </div>
