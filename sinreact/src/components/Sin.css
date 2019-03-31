@@ -1,13 +1,46 @@
 .sin-card {
-	background-color: grey;
-	margin: 8px;
-	width: 350px;
-	color: black;
+    background-color: grey;
+    margin: 8px;
+    width: 340px;
 }
 
-.sins-dashboard {
-	height: 120px;
-	background-color: #373737;
-	padding-left: 8%;
-	font-size: 40;
+.sins-dashboard-header {
+    height: 48px;
+    background-color: #F5F5F5;
+    padding-left: 8%;
+    font-size: 32;
+}
+
+.header {
+    height: 104px;
+    background-color: #282828;
+    padding-left: 8%;
+    z-index: 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.error {
+    padding-left: 24%;
+    padding-right: 24%;
+}
+
+.profile-header {
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: #373737;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.profile-username {
+    font-size: 48px;
+    margin: 0px;
+}
+
+.profile-avatar {
+    margin-right: 16px;
+}
+
+.profile-tabs {
+    margin-top: 8px;
 }
