@@ -40,21 +40,26 @@
 		{
 			"name": "ActivateUser",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{URL}}:{{port}}/activation/{{code}}",
+					"raw": "{{URL}}:{{port}}/activation?code={{code}}",
 					"host": [
 						"{{URL}}"
 					],
 					"port": "{{port}}",
 					"path": [
-						"activation",
-						"{{code}}"
+						"activation"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "{{code}}"
+						}
 					]
 				}
 			},
@@ -95,6 +100,162 @@
 							"key": "email",
 							"value": "{{EMAIL}}"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/user/{{name}}",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"user",
+						"{{name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all sins",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/sins",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sins"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sins by type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/sins?filter=type",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sins"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "type"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add sin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/sins?sinType=type&sinWeight=10&sinDescription=description",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sins"
+					],
+					"query": [
+						{
+							"key": "sinType",
+							"value": "type"
+						},
+						{
+							"key": "sinWeight",
+							"value": "10"
+						},
+						{
+							"key": "sinDescription",
+							"value": "description"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sins for current user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/sins/current",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sins",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sins for user with name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}:{{port}}/sins/user/{{name}}",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sins",
+						"user",
+						"{{name}}"
 					]
 				}
 			},

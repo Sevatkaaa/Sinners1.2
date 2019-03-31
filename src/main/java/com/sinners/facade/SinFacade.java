@@ -2,9 +2,9 @@ package com.sinners.facade;
 
 import com.sinners.converter.SinConverter;
 import com.sinners.service.SinService;
+import com.sinners.service.UserService;
 import com.sinners.sin.SinData;
 import com.sinners.sin.SinModel;
-import com.sinners.user.UserModel;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -15,6 +15,9 @@ public class SinFacade {
 
     @Resource
     private SinService sinService;
+
+    @Resource
+    private UserService userService;
 
     @Resource
     private SinConverter sinConverter;
@@ -29,7 +32,11 @@ public class SinFacade {
         return sinConverter.convert(sins);
     }
 
-    public void addSin(UserModel user, String sinType, Integer sinWeight, String sinDescription) {
-        sinService.addSin(user, sinType, sinWeight, sinDescription);
+    public void addSin(String username, String sinType, Integer sinWeight, String sinDescription) {
+        sinService.addSin(userService.getUserByName(username), sinType, sinWeight, sinDescription);
+    }
+
+    public List<SinData> getSinsForUser(String username) {
+        return sinConverter.convert(sinService.getSinsForUser(userService.getUserByName(username)));
     }
 }
