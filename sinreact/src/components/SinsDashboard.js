@@ -35,6 +35,7 @@ class SinsDashboard extends React.Component {
 				<Grid container justify="center">
 					{this.state.sins.map((sin, i) => (
 						<SinCard
+                            key={i}
 							sin={sin}
 							onClick={() => this.setState({score: this.state.score + sin.points})}
 						/>
